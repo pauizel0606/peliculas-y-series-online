@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lumière · Cine y series</title>
+<style>
+:root{--bg:#0a0a0f;--s:#14141c;--s2:#1d1d28;--t:#f4f4f8;--m:#9a9ab0;--a:#ff3b5c;--a2:#ff8a3b;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.logo{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:26px;letter-spacing:.5px;background:linear-gradient(90deg,var(--a),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hide{display:none!important}
+.lg h3{text-align:center;font-size:20px;margin-bottom:14px}.lg li{color:#cfcfe0;font-size:14px;line-height:1.55;margin:0 0 10px 18px}.lg .ok{display:inline-block;background:#4ade8022;color:#4ade80;font-weight:800;font-size:12px;letter-spacing:1px;padding:5px 10px;border-radius:6px;margin:0 auto 14px}
+/* AUTH */
+#auth,#legal{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;overflow:hidden}
+#auth::before,#auth::after,#legal::before,#legal::after{content:"";position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px);opacity:.35;animation:fl 14s ease-in-out infinite alternate}
+#auth::before,#legal::before{background:var(--a);top:-25vmax;left:-15vmax}
+#auth::after,#legal::after{background:#5b3bff;bottom:-30vmax;right:-15vmax;animation-delay:-6s}
+@keyframes fl{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+.card{position:relative;z-index:1;width:100%;max-width:400px;background:rgba(20,20,28,.78);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:34px 30px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.card .logo{font-size:34px;text-align:center;margin-bottom:6px}
+.card p.sub{text-align:center;color:var(--m);font-size:14px;margin-bottom:22px}
+.tabs{display:flex;background:var(--s);border-radius:12px;padding:4px;margin-bottom:18px}
+.tabs button{flex:1;padding:10px;border-radius:9px;color:var(--m);font-weight:600;transition:.2s}
+.tabs button.on{background:var(--s2);color:var(--t)}
+.f{margin-bottom:14px}
+.f label{display:block;font-size:12px;color:var(--m);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
+.f input{width:100%;padding:13px 14px;border-radius:11px;border:1px solid #2a2a3a;background:var(--s);color:var(--t);font-size:15px;outline:0;transition:.2s}
+.f input:focus{border-color:var(--a);box-shadow:0 0 0 3px rgba(255,59,92,.18)}
+.btn{width:100%;padding:14px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--a),var(--a2));box-shadow:0 10px 30px rgba(255,59,92,.35);transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+#err{color:#ff7a8e;font-size:13px;min-height:18px;margin-bottom:10px;text-align:center}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:26px;padding:calc(14px + env(safe-area-inset-top,0px)) 4% 14px;background:linear-gradient(#0a0a0fee,#0a0a0f00);transition:.3s}
+nav.sc{background:#0a0a0fee;backdrop-filter:blur(12px)}
+nav .links{display:flex;gap:20px;flex:1}
+nav .links button{color:var(--m);font-weight:600;font-size:14px;transition:.2s}
+nav .links button:hover,nav .links button.on{color:var(--t)}
+.av{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--m)}
+.av i{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-style:normal;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--a),#7b3bff)}
+.out{padding:7px 12px;border:1px solid #333;border-radius:8px;font-size:13px;color:var(--t)}
+.out:hover{border-color:var(--a)}
+/* HERO */
+.hero{position:relative;height:82vh;min-height:520px;display:flex;align-items:flex-end;padding:0 4% 90px;overflow:hidden}
+.hero .bg{position:absolute;inset:0;transition:background .6s}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 4%,transparent 55%),linear-gradient(90deg,#0a0a0fcc 0%,transparent 65%)}
+.hero .in{position:relative;z-index:2;max-width:560px}
+.badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--a);border:1px solid var(--a);padding:3px 9px;border-radius:5px;margin-bottom:14px}
+.hero h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,78px);line-height:1;margin-bottom:14px;text-shadow:0 4px 30px #000a}
+.meta{display:flex;gap:12px;color:var(--m);font-size:14px;margin-bottom:14px;flex-wrap:wrap}
+.meta b{color:#4ade80}
+.hero p{color:#d0d0de;line-height:1.55;margin-bottom:24px;font-size:16px}
+.row-b{display:flex;gap:12px;flex-wrap:wrap}
+.b1,.b2{padding:13px 26px;border-radius:10px;font-weight:700;display:flex;align-items:center;gap:8px;transition:.2s}
+.b1{background:#fff;color:#000}.b1:hover{background:#e6e6e6;transform:scale(1.04)}
+.b2{background:#ffffff26;backdrop-filter:blur(8px)}.b2:hover{background:#ffffff40}
+/* ROWS */
+main{position:relative;z-index:3;margin-top:-60px;padding-bottom:60px}
+.sec{margin:0 0 34px}
+.sec h2{font-size:20px;padding:0 4%;margin-bottom:12px}
+.sl{display:flex;gap:14px;overflow-x:auto;padding:8px 4% 18px;scroll-snap-type:x proximity;scrollbar-width:none}
+.sl::-webkit-scrollbar{display:none}
+.p{position:relative;flex:0 0 auto;width:170px;aspect-ratio:2/3;border-radius:12px;overflow:hidden;cursor:pointer;scroll-snap-align:start;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;box-shadow:0 8px 24px #0008}
+.p:hover{transform:scale(1.07) translateY(-4px);box-shadow:0 18px 40px #000c;z-index:5}
+.p::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,#ffffff33,transparent 50%)}
+.p::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#000a,transparent 55%)}
+.p .ty{position:absolute;top:10px;left:10px;font-size:10px;font-weight:800;letter-spacing:1px;background:#0007;padding:3px 7px;border-radius:5px;z-index:2}
+.p .tt{position:relative;z-index:2;font-family:Georgia,serif;font-weight:700;font-size:19px;line-height:1.1;text-shadow:0 2px 10px #000}
+.p .yy{position:relative;z-index:2;font-size:12px;color:#ddd;margin-top:4px}
+.top .p{margin-left:44px}
+.top .n{position:absolute;left:-46px;bottom:-14px;font-family:Georgia,serif;font-size:130px;font-weight:900;color:var(--bg);-webkit-text-stroke:3px #5a5a72;line-height:1;z-index:0;pointer-events:none}
+.top .w{position:relative;flex:0 0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px;padding:0 4%}
+.grid .p{width:auto}
+.empty{padding:60px 4%;color:var(--m);text-align:center}
+/* MODAL */
+.md{position:fixed;inset:0;z-index:50;background:#000b;backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px;animation:fi .25s}
+@keyframes fi{from{opacity:0}}
+.mb{width:100%;max-width:720px;max-height:90vh;overflow:auto;background:var(--s);border-radius:20px;box-shadow:0 40px 100px #000}
+.mh{height:280px;position:relative;display:flex;align-items:flex-end;padding:26px}
+.mh::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--s),transparent 70%)}
+.mh h2{position:relative;z-index:2;font-family:Georgia,serif;font-size:42px;line-height:1}
+.x{position:absolute;top:14px;right:14px;z-index:3;width:36px;height:36px;border-radius:50%;background:#000a;font-size:18px}
+.mc{padding:6px 26px 28px}
+.mc p{color:#cfcfe0;line-height:1.6;margin:14px 0 22px}
+.tag{display:inline-block;padding:4px 10px;border-radius:20px;background:var(--s2);font-size:12px;color:var(--m);margin-right:6px}
+/* PLAYER */
+#pl{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+#pl .scr{position:absolute;inset:0;animation:pan 18s ease-in-out infinite alternate;background-size:200% 200%}
+@keyframes pan{to{background-position:100% 100%}}
+#pl .ctl{position:relative;z-index:2;padding:30px 5% calc(30px + env(safe-area-inset-bottom,0px));background:linear-gradient(0deg,#000e,transparent)}
+.bar{height:5px;background:#ffffff33;border-radius:3px;margin:12px 0;cursor:pointer}
+.bar i{display:block;height:100%;width:0;background:var(--a);border-radius:3px}
+.pt{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));left:5%;right:5%;display:flex;justify-content:space-between;z-index:2;align-items:center}
+.pc{position:absolute;inset:0;display:grid;place-items:center;z-index:1;text-align:center;color:#fff9;font-size:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--s2);padding:12px 20px;border-radius:30px;font-size:14px;z-index:200;box-shadow:0 10px 30px #000a;animation:fi .3s}
+footer{text-align:center;color:#5d5d72;font-size:12px;padding:20px}
+@media(max-width:640px){nav{gap:12px}.av span{display:none}.p{width:138px}.top .n{font-size:100px;left:-36px}.top .p{margin-left:34px}.hero{padding-bottom:70px}}
+</style>
+</head>
+<body>
+ 
+<section id="legal">
+  <div class="card lg">
+    <div class="logo">Lumière</div>
+    <div style="text-align:center"><span class="ok">AVISO LEGAL</span></div>
+    <h3>Todo el contenido es gratuito</h3>
+    <ul>
+      <li>Todo el contenido de Lumière es <b>100 % gratuito</b>. No cobramos nada ni pedimos datos de pago para ver ninguna película.</li>
+      <li>Solo incluimos obras de <b>dominio público</b> o publicadas bajo <b>licencias libres</b> (como Creative Commons) por sus autores.</li>
+      <li>Lumière no aloja ningún vídeo: se reproducen desde su fuente original (Internet Archive o la Blender Foundation).</li>
+      <li>El dominio público puede variar según el país. Comprueba que la obra pueda verse libremente donde vives.</li>
+      <li>Tu cuenta se guarda únicamente en tu navegador.</li>
+    </ul>
+    <button class="btn" id="acc" style="margin-top:12px">Entiendo y quiero entrar</button>
+  </div>
+</section>
+ 
+<section id="auth" class="hide">
+  <div class="card">
+    <div class="logo">Lumière</div>
+    <p class="sub">Cine gratuito y legal, sin pagos</p>
+    <div class="tabs"><button id="tL" class="on">Iniciar sesión</button><button id="tR">Crear cuenta</button></div>
+    <div class="f hide" id="fN"><label>Nombre</label><input id="nm" placeholder="Tu nombre" autocomplete="name"></div>
+    <div class="f"><label>Correo electrónico</label><input id="em" type="email" placeholder="tu@correo.com" autocomplete="email"></div>
+    <div class="f"><label>Contraseña</label><input id="pw" type="password" placeholder="Mínimo 6 caracteres" autocomplete="current-password"></div>
+    <div id="err"></div>
+    <button class="btn" id="go">Entrar</button>
+  </div>
+</section>
+ 
+<div id="app" class="hide">
+  <nav id="nv">
+    <div class="logo">Lumière</div>
+    <div class="links" id="lk">
+      <button data-v="home" class="on">Inicio</button><button data-v="clasico">Clásicos</button><button data-v="libre">Cine libre</button><button data-v="list">Mi lista</button>
+    </div>
+    <div class="av"><i id="ini"></i><span id="who"></span><button class="out" id="lo">Salir</button></div>
+  </nav>
+  <div id="view"></div>
+  <footer>Lumière · Todo el contenido es gratuito (dominio público y licencias libres). Los pósters son ilustraciones generadas.</footer>
+</div>
+ 
+<script>
+const D=[
+{id:1,t:"Nosferatu",ty:"Clásico",y:1922,g:"Terror · Expresionismo",a:"12+",d:"1 h 34 min",h:160,s:"Un joven agente inmobiliario viaja a Transilvania y despierta al conde Orlok, un vampiro que sembrará la muerte a su paso.",u:"https://archive.org/details/nosferatu",e:"nosferatu"},
+{id:2,t:"El gabinete del doctor Caligari",ty:"Clásico",y:1920,g:"Terror · Expresionismo",a:"12+",d:"1 h 16 min",h:270,s:"Un misterioso hipnotista y su sonámbulo protagonizan una pesadilla de decorados retorcidos que cambió el cine para siempre.",u:"https://archive.org/search?query=Cabinet+of+Dr+Caligari+1920"},
+{id:3,t:"Viaje a la Luna",ty:"Clásico",y:1902,g:"Fantasía · Aventura",a:"TP",d:"14 min",h:215,s:"Un grupo de astrónomos viaja a la Luna en un cañón gigante. La película que inventó los efectos especiales, de Georges Méliès.",u:"https://archive.org/search?query=Le+Voyage+dans+la+Lune+1902"},
+{id:4,t:"El gran robo del tren",ty:"Clásico",y:1903,g:"Western · Acción",a:"TP",d:"12 min",h:30,s:"Unos bandidos asaltan un tren en una de las primeras películas narrativas de la historia del cine.",u:"https://archive.org/search?query=The+Great+Train+Robbery+1903"},
+{id:5,t:"Intolerancia",ty:"Clásico",y:1916,g:"Drama · Épica",a:"12+",d:"3 h",h:45,s:"Cuatro historias de distintas épocas muestran el eterno conflicto de la intolerancia, en una producción monumental de D. W. Griffith.",u:"https://archive.org/search?query=Intolerance+1916"},
+{id:6,t:"La llegada del tren a la estación",ty:"Clásico",y:1896,g:"Documental · Pionero",a:"TP",d:"1 min",h:195,s:"Una de las primeras proyecciones de los hermanos Lumière, que según la leyenda hizo huir al público de la sala.",u:"https://archive.org/search?query=Lumiere+arrivee+train+1896"},
+{id:7,t:"El estudiante de Praga",ty:"Clásico",y:1913,g:"Fantasía · Terror",a:"12+",d:"1 h 25 min",h:300,s:"Un estudiante vende su reflejo a un siniestro hechicero. Un clásico del cine fantástico alemán.",u:"https://archive.org/search?query=Der+Student+von+Prag+1913"},
+{id:8,t:"Big Buck Bunny",ty:"Libre",y:2008,g:"Animación · Comedia",a:"TP",d:"10 min",h:120,s:"Un enorme y bonachón conejo decide dar su merecido a tres roedores abusones. Cortometraje de la Blender Foundation.",u:"https://peach.blender.org/",v:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},
+{id:9,t:"Sintel",ty:"Libre",y:2010,g:"Animación · Fantasía",a:"12+",d:"15 min",h:345,s:"Una joven guerrera busca a su dragón perdido en un viaje emotivo y lleno de acción. Película libre de Blender.",u:"https://durian.blender.org/",v:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},
+{id:10,t:"Tears of Steel",ty:"Libre",y:2012,g:"Ciencia ficción · Acción",a:"12+",d:"12 min",h:200,s:"Un grupo de guerreros y científicos intenta salvar el mundo de unos robots en Ámsterdam. Película libre de Blender.",u:"https://mango.blender.org/",v:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},
+{id:11,t:"Elephants Dream",ty:"Libre",y:2006,g:"Animación · Surrealista",a:"TP",d:"11 min",h:10,s:"Dos extraños personajes exploran una máquina gigantesca. La primera película abierta del mundo, de Blender.",u:"https://orange.blender.org/",v:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"}
+];
+ 
+const $=s=>document.querySelector(s);
+const mem={};
+const st={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]??null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}};
+const users=()=>{try{return JSON.parse(st.get('lm_users')||'{}')}catch(e){return{}}};
+let me=null,view='home',mode='L',hi=0,tm=null;
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('lm:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return btoa(s)}}
+const lst=()=>{try{return JSON.parse(st.get('lm_list_'+me)||'[]')}catch(e){return[]}};
+const bg=h=>`linear-gradient(160deg,hsl(${h} 75% 42%),hsl(${(h+45)%360} 65% 14%))`;
+function setMode(m){mode=m;$('#tL').classList.toggle('on',m=='L');$('#tR').classList.toggle('on',m=='R');$('#fN').classList.toggle('hide',m=='L');$('#go').textContent=m=='L'?'Entrar':'Crear mi cuenta';$('#err').textContent='';$('#pw').autocomplete=m=='L'?'current-password':'new-password'}
+$('#tL').onclick=()=>setMode('L');$('#tR').onclick=()=>setMode('R');
+async function submit(){
+  const em=$('#em').value.trim().toLowerCase(),pw=$('#pw').value,nm=$('#nm').value.trim(),e=$('#err'),U=users();
+  if(!/^\S+@\S+\.\S+$/.test(em))return e.textContent='Introduce un correo válido.';
+  if(pw.length<6)return e.textContent='La contraseña necesita al menos 6 caracteres.';
+  const h=await hash(pw);
+  if(mode=='R'){
+    if(!nm)return e.textContent='Escribe tu nombre.';
+    if(U[em])return e.textContent='Ya existe una cuenta con ese correo.';
+    U[em]={name:nm,h};st.set('lm_users',JSON.stringify(U));
+  }else{
+    if(!U[em]||U[em].h!==h)return e.textContent='Correo o contraseña incorrectos.';
+  }
+  st.set('lm_session',em);enter(em);
+}
+$('#go').onclick=submit;
+['em','pw','nm'].forEach(i=>$('#'+i).addEventListener('keydown',e=>e.key=='Enter'&&submit()));
+function enter(em){
+  me=em;const u=users()[em];if(!u){return out()}
+  $('#auth').classList.add('hide');$('#legal').classList.add('hide');$('#app').classList.remove('hide');
+  $('#ini').textContent=u.name[0].toUpperCase();$('#who').textContent=u.name;
+  view='home';render();
+}
+function out(){st.set('lm_session','');me=null;clearInterval(tm);$('#app').classList.add('hide');$('#auth').classList.add('hide');$('#legal').classList.remove('hide');$('#pw').value=''}
+$('#lo').onclick=out;
+$('#lk').onclick=e=>{const v=e.target.dataset.v;if(!v)return;view=v;[...$('#lk').children].forEach(b=>b.classList.toggle('on',b.dataset.v==v));render();scrollTo(0,0)};
+addEventListener('scroll',()=>$('#nv').classList.toggle('sc',scrollY>40));
+const poster=(m,i)=>`<div class="p" style="background:${bg(m.h)}" data-id="${m.id}"><span class="ty">${m.ty.toUpperCase()}</span><div class="tt">${m.t}</div><div class="yy">${m.y}</div></div>`;
+const row=(t,a,top)=>`<div class="sec ${top?'top':''}"><h2>${t}</h2><div class="sl">${a.map((m,i)=>top?`<div class="w"><span class="n">${i+1}</span>${poster(m)}</div>`:poster(m)).join('')}</div></div>`;
+function render(){
+  const L=lst(),V=$('#view');let h='';
+  if(view=='home'){
+    const f=D[hi%5];
+    h=`<header class="hero"><div class="bg" style="background:${bg(f.h)}"></div><div class="in"><span class="badge">100% GRATIS</span><h1>${f.t}</h1><div class="meta"><b>Gratis</b><span>${f.y}</span><span>${f.a}</span><span>${f.d}</span><span>${f.g}</span></div><p>${f.s}</p><div class="row-b"><button class="b1" data-play="${f.id}">▶ Ver gratis</button><button class="b2" data-id="${f.id}">ⓘ Más información</button></div></div></header><main>`;
+    h+=row('Destacadas gratis',D);
+    h+=row('Cine clásico',D.filter(m=>m.ty=='Clásico'));
+    h+=row('Cine libre (Blender)',D.filter(m=>m.ty=='Libre'));
+    if(L.length)h+=row('Mi lista',D.filter(m=>L.includes(m.id)));
+    h+='</main>';
+  }else{
+    const a=view=='list'?D.filter(m=>L.includes(m.id)):D.filter(m=>m.ty==(view=='clasico'?'Clásico':'Libre'));
+    const T={clasico:'Cine clásico',libre:'Cine libre',list:'Mi lista'}[view];
+    h=`<main style="margin-top:100px"><div class="sec"><h2 style="font-size:30px;margin-bottom:22px">${T}</h2>${a.length?`<div class="grid">${a.map(poster).join('')}</div>`:'<div class="empty">Aún no has añadido nada. Abre un título y pulsa «+ Mi lista».</div>'}</div></main>`;
+  }
+  V.innerHTML=h;
+}
+$('#view').onclick=e=>{
+  const pl=e.target.closest('[data-play]');if(pl)return play(+pl.dataset.play);
+  const c=e.target.closest('[data-id]');if(c)modal(+c.dataset.id);
+};
+setInterval(()=>{if(me&&view=='home'&&!document.querySelector('.md,#pl')){hi++;const f=D[hi%5],b=$('.hero .bg');if(b){render()}}},9000);
+function toast(t){const x=document.createElement('div');x.className='toast';x.textContent=t;document.body.append(x);setTimeout(()=>x.remove(),2200)}
+function modal(id){
+  const m=D.find(x=>x.id==id),on=lst().includes(id),M=document.createElement('div');M.className='md';
+  M.innerHTML=`<div class="mb"><div class="mh" style="background:${bg(m.h)}"><button class="x">✕</button><h2>${m.t}</h2></div><div class="mc"><div class="meta"><b>Gratis</b><span>${m.y}</span><span>${m.a}</span><span>${m.d}</span></div><span class="tag">${m.ty}</span><span class="tag">${m.g}</span><p>${m.s}</p><div class="row-b"><button class="b1" id="mp">▶ Ver gratis</button><button class="b2" id="ml">${on?'✓ En mi lista':'+ Mi lista'}</button></div></div></div>`;
+  document.body.append(M);
+  M.onclick=e=>{if(e.target==M||e.target.className=='x')M.remove()};
+  M.querySelector('#mp').onclick=()=>{M.remove();play(id)};
+  M.querySelector('#ml').onclick=e=>{let L=lst();L=L.includes(id)?L.filter(i=>i!=id):[...L,id];st.set('lm_list_'+me,JSON.stringify(L));e.target.textContent=L.includes(id)?'✓ En mi lista':'+ Mi lista';toast(L.includes(id)?'Añadido a Mi lista':'Eliminado de Mi lista');render()};
+}
+function play(id){
+  const m=D.find(x=>x.id==id),P=document.createElement('div');P.id='pl';
+  const fb=`<div style="text-align:center;padding:24px;max-width:420px"><div style="font-family:Georgia,serif;font-size:28px;margin-bottom:10px">${m.t}</div><p style="color:#bbb;margin-bottom:18px;line-height:1.5">Esta película se ve en su fuente original gratuita.</p><a class="b1" href="${m.u}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;color:#000">▶ Abrir película</a></div>`;
+  P.innerHTML=`<div class="pt"><button class="out" id="pb">← Volver</button><span>${m.t}</span><a class="out" href="${m.u}" target="_blank" rel="noopener" style="text-decoration:none;color:#fff">Fuente ↗</a></div><div id="stg" style="position:absolute;inset:64px 0 0 0;display:grid;place-items:center;background:#000"></div>`;
+  document.body.append(P);
+  const S=P.querySelector('#stg');
+  if(m.v){S.innerHTML=`<video src="${m.v}" controls autoplay playsinline style="width:100%;height:100%;background:#000"></video>`;S.firstChild.addEventListener('error',()=>{S.innerHTML=fb})}
+  else if(m.e){S.innerHTML=`<iframe src="https://archive.org/embed/${m.e}" allowfullscreen allow="fullscreen" style="width:100%;height:100%;border:0"></iframe>`}
+  else S.innerHTML=fb;
+  const cl=()=>{P.remove();document.removeEventListener('keydown',k)},k=e=>e.key=='Escape'&&cl();
+  document.addEventListener('keydown',k);P.querySelector('#pb').onclick=cl;
+}
+$('#acc').onclick=()=>{$('#legal').classList.add('hide');$('#auth').classList.remove('hide')};
+const s=st.get('lm_session');if(s&&users()[s])enter(s);else $('#legal').classList.remove('hide');
+</script>
+</body>
+</html>
